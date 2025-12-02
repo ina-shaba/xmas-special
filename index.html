@@ -64,12 +64,11 @@
       flex-wrap: wrap;
     }
 
-  /* --- LOGO FIX (Näher zusammen) --- */
+   /* --- LOGO --- */
    .logo {
       display: flex;
-      align-items: center; /* Behält die vertikale Mitte bei */
-      gap: 0; /* Flex-Lücke komplett entfernen */
-      
+      align-items: center;
+      gap: 0; 
       color: #fff;
       font-weight: 800;
       font-size: 1.6rem; 
@@ -82,25 +81,15 @@
       height: 32px !important; 
       width: auto;
       display: block;
-      
-      /* WICHTIG: Negativer Abstand zieht den Text nach links in das Bild */
       margin-right: -6px; 
-      
       filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
       position: relative;
       top: 0; 
     }
     
-    /* Desktop Anpassung */
     @media (min-width: 600px) {
-        .logo { 
-            font-size: 2.2rem; 
-        } 
-        .logo img { 
-            height: 44px !important; 
-            /* Auf großen Screens ggf. noch näher ran? */
-            margin-right: -8px; 
-        }
+        .logo { font-size: 2.2rem; } 
+        .logo img { height: 44px !important; margin-right: -8px; }
     }
 
     nav {
@@ -129,7 +118,7 @@
       text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
     }
 
-    /* --- HERO SECTION --- */
+    /* --- HERO --- */
     .hero {
       max-width: 1080px;
       margin: 1rem auto 2rem;
@@ -197,7 +186,6 @@
    .hero-visual {
       background: linear-gradient(325deg, rgba(251, 191, 36, 0.15), rgba(251, 191, 36, 0.03));
       backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       border: none;
       box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.15), 0 8px 32px rgba(0, 0, 0, 0.2);
       border-radius: 16px;
@@ -215,49 +203,20 @@
       gap: 0.5rem;
     }
 
-    .hero-visual ul { 
-        padding-left: 0; 
-        list-style: none;
-        margin-bottom: 0.8rem; 
-    }
-    
-    .hero-visual li { 
-        margin-bottom: 0.6rem; 
-        font-size: 0.9rem; 
-        display: flex;
-        align-items: baseline;
-        gap: 0.5rem;
-    }
-    
-    .hero-visual li::before {
-        content: "•";
-        color: var(--accent-soft);
-        font-weight: bold;
-    }
+    .hero-visual ul { padding-left: 0; list-style: none; margin-bottom: 0.8rem; }
+    .hero-visual li { margin-bottom: 0.6rem; font-size: 0.9rem; display: flex; align-items: baseline; gap: 0.5rem; }
+    .hero-visual li::before { content: "•"; color: var(--accent-soft); font-weight: bold; }
 
-    /* --- HAUPTBEREICH --- */
-    main {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 1rem;
-    }
-
+    /* --- MAIN --- */
+    main { max-width: 1080px; margin: 0 auto; padding: 0 1rem; }
     section { margin-top: 2.5rem; }
 
-    .section-heading {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 1rem;
-    }
-    
-    @media (min-width: 600px) {
-        .section-heading { flex-direction: row; align-items: baseline; gap: 0.8rem; }
-    }
-    
+    .section-heading { display: flex; flex-direction: column; margin-bottom: 1rem; }
+    @media (min-width: 600px) { .section-heading { flex-direction: row; align-items: baseline; gap: 0.8rem; } }
     .section-heading h2 { font-size: 1.4rem; color: #fff; margin-bottom: 0.2rem; }
     .section-heading small { font-size: 0.85rem; color: var(--muted); }
 
-    /* --- KARTEN DESIGN --- */
+    /* --- CARDS --- */
     .card {
       background: var(--bg-card);
       border-radius: var(--radius);
@@ -276,16 +235,9 @@
       gap: 1.5rem;
       margin-top: 1rem;
     }
+    @media (min-width: 800px) { .card-grid { grid-template-columns: 1fr 1fr; } }
 
-    @media (min-width: 800px) {
-      .card-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    /* Flex-Wrapper für die linke Spalte, damit Textarea Höhe zieht */
-    .prompt-col {
-      display: flex;
-      flex-direction: column;
-    }
+    .prompt-col { display: flex; flex-direction: column; }
 
     .example-box, .v-box {
       background: rgba(15, 23, 42, 0.6); 
@@ -294,7 +246,7 @@
       color: var(--muted);
       font-size: 0.9rem;
       border: 1px solid rgba(255,255,255,0.05);
-      height: 100%; /* Füllt auch die Höhe */
+      height: 100%;
     }
 
     .example-box img, .example-box video, .v-box video {
@@ -331,62 +283,6 @@
       border-radius: 8px;
     }
 
-    /* --- UPDATE: Auffälligerer Banner & weniger Abstand --- */
-
-.internal-badge {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  
-  width: 100%; 
-  margin-top: 0.5rem; 
-  margin-bottom: 0.5rem; 
-  
-  padding: 0.75rem 1rem;
-  
-  /* NEU: Ein heller Verlauf (macht es freundlicher, nicht schwarz) */
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
-  
-  /* NEU: Heller, feiner Silber-Rahmen */
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  /* Der goldene Akzent links bleibt (für die Wichtigkeit) */
-  border-left: 4px solid #fbbf24;
-  
-  border-radius: 8px;
-  
-  color: #fff;
-  text-decoration: none;
-  font-size: 0.85rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-
-.internal-badge:hover {
-  /* Wird beim Hover deutlich heller */
-  background: rgba(255, 255, 255, 0.15);
-  border-color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-
-.internal-badge strong {
-  color: #fbbf24; /* Gold passt super zu Silber/Dunkelblau */
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.internal-badge .icon {
-  font-size: 1.1rem;
-  opacity: 1; /* Volle Deckkraft für Icon */
-}
-
-.internal-badge .arrow {
-  margin-left: auto; 
-  color: #fff;
-  opacity: 0.8;
-}
-
-
     /* ZUCKERSTANGEN-RAND */
     .hero-inner::before, .card::before {
       content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 2px; 
@@ -398,22 +294,23 @@
     /* --- BUTTONS --- */
     .btn-row {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-top: 0.4rem;
+      flex-wrap: wrap; 
+      gap: 0.6rem;
+      margin-top: 1rem;
     }
 
     .copy-btn, .tool-btn {
-      flex: 1; 
+      flex: 1; /* Alle Buttons füllen den Platz */
       text-align: center;
       justify-content: center;
       white-space: nowrap;
       min-width: 120px;
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
     }
 
+    /* Kopieren Button (Blau) */
     .copy-btn {
-      font-size: 0.9rem;
-      padding: 0.6rem 1.2rem;
       background: linear-gradient(135deg, var(--m-blue-dark), var(--m-blue-light));
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 999px;
@@ -425,12 +322,11 @@
     }
     .copy-btn:active { transform: scale(0.96); }
 
+    /* Normaler Tool Button (Gold) */
     .tool-btn {
-      font-size: 0.9rem;
-      padding: 0.6rem 1.2rem;
       border-radius: 999px;
       background: transparent;
-      border: 1px solid var(--accent-soft); 
+      border: 1px solid var(--accent-soft); /* 1px Gold */
       color: var(--accent-soft);
       text-decoration: none;
       font-weight: 600;
@@ -442,6 +338,22 @@
     }
     .tool-btn:active { background: rgba(251, 191, 36, 0.1); transform: scale(0.96); }
 
+    /* NEU: Interner Tool Button (Silber - gleicher Stil, keine Glow-Effekte) */
+    .tool-btn.internal {
+      /* Gleiche Rahmendicke wie der goldene Button (1px), aber in Silber */
+      border: 1px solid #cbd5e1; 
+      color: #cbd5e1;
+    }
+    
+    .tool-btn.internal:hover {
+      /* KEIN GLOW (box-shadow: none), nur dezente Aufhellung */
+      background: rgba(255, 255, 255, 0.05);
+      border-color: #fff;
+      color: #fff;
+      box-shadow: none; 
+    }
+
+    /* Tools Liste am Ende */
     .tool-list {
       list-style: none;
       font-size: 0.9rem;
@@ -486,7 +398,6 @@
     <div class="logo">
   <img src="w_logo.png" alt="W Logo">
   <span style="color: var(--accent-soft);">AI</span>
-
   <span>nachten-Special</span>
 </div>
       <nav>
@@ -510,7 +421,7 @@
           Kreiere Gedichte, Fotos, Videos und Spiele, die du mit deinen Freunden teilen kannst.
         </p>
         <p style="margin-top: 1rem; color: var(--accent-soft); font-size: 0.9rem; font-weight: 500;">
-          ⚠️ Für ein paar Modelle muss man sich auf der Website anmelden.
+        Für ein paar Modelle muss man sich auf der Website anmelden.
         </p>
       </div>
       
@@ -528,14 +439,6 @@
     </div>
   </section>
 
-
-
-
-
-
-
-
-
   <main>
     <section id="texte">
       <div class="section-heading">
@@ -549,21 +452,17 @@
           <div class="prompt-col">
             <textarea id="prompt1" class="prompt" readonly>
 Prompt:
-"Schreibe ein lockeres und modernes Weihnachtsgedicht für mein Team. Es soll herzlich sein, aber auch witzig und bloß nicht kitschig. Bitte bau Folgendes ein: Ein Dankeschön für die Zusammenarbeit. Vorfreude auf nächstes Jahr mit einem Augenzwinkern. Etwas Weihnachtsstimmung (Glühwein, Lichter). Mach es ca. 12-16 Zeilen lang."
+"Schreibe ein lockeres und modernes Weihnachtsgedicht für mein Team. Es soll herzlich sein, aber auch witzig und bloß nicht kitschig. Bitte bau Folgendes ein: Ein Dankeschön für die Zusammenarbeit. Vorfreude auf nächstes Jahr mit einem Augenzwinkern. Etwas Weihnachtsstimmung (Glühwein, Lichter). Mach es ca. 12-16 Zeilen lang."
 </textarea>
             <div class="hint">✨ <strong>Anpassen:</strong> Füge die Namen deiner „Kolleg:innen“ ein.</div>
 
-<a href="https://gaia.bmwgroup.net/genai/" target="_blank" class="internal-badge">
-  <span class="icon">🗣️</span>
-  <span>Hier geht es auf unser internes Tool <strong>GAIA</strong> weiter</span>
-  <span class="arrow">→</span>
-</a>
-
-<div class="btn-row">
-   </div>
-
             <div class="btn-row">
               <button class="copy-btn" data-copy="prompt1" onclick="copyPrompt('prompt1')">Kopieren</button>
+              
+              <a class="tool-btn internal" href="https://gaia.bmwgroup.net/genai/" target="_blank">
+                <span>↗</span> GAIA (intern)
+              </a>
+
               <a class="tool-btn" href="https://chatgpt.com" target="_blank"><span>↗</span>ChatGPT</a>
             </div>
           </div>
@@ -601,14 +500,13 @@ Warme, unscharfe Lichter im Hintergrund. Fotorealistischer Stil, 8k Auflösung."
 </textarea>
 <div class="hint">✨ <strong>Tipp:</strong> Wähle <b>"No Style"</b> auf der Website aus.</div>
 
-<a href="https://imagine.bmwgroup.net/homepage" target="_blank" class="internal-badge">
-  <span class="icon">🖼️</span>
-  <span>Hier geht es auf unser internes Tool <strong>IMAGINE</strong> weiter</span>
-  <span class="arrow">→</span>
-</a>
-
           <div class="btn-row">
             <button class="copy-btn" data-copy="prompt4" onclick="copyPrompt('prompt4')">Kopieren</button>
+            
+            <a class="tool-btn internal" href="https://imagine.bmwgroup.net/homepage" target="_blank">
+                <span>↗</span> IMAGINE (intern)
+            </a>
+            
             <a class="tool-btn" href="https://perchance.org/ai-text-to-image-generator" target="_blank"><span>↗</span>Perchance</a>
           </div>
         </div>
@@ -693,25 +591,25 @@ Tech: Responsive Design, Mobile-Touch-Support, Highscore-Anzeige."</textarea>
       </div>
       <div class="card">
         <h3>Welches Tool für was?</h3>
-        <p>Du kannst die Prompts mit verschiedenen (kostenlosen) AI-Tools ausprobieren:</p>
+        <p>Du kannst die Prompts mit verschiedenen KI-Tools ausprobieren:</p>
         <ul class="tool-list">
           <li>
-            <strong>Text-AI</strong> – für Gedichte, Songtexte, Quizfragen<br>
+            <strong>Text-KI</strong> – für Gedichte, Quizfragen - Trivia Spiele<br>
             <a href="https://chatgpt.com" class="tool-link" target="_blank">ChatGPT</a> ·
             <a href="https://gemini.google.com" class="tool-link" target="_blank">Google&nbsp;Gemini</a>
           </li>
           <li>
-            <strong>Bild-AI</strong> – für Postkarten und Illustrationen<br>
+            <strong>Bild-KI</strong> – für Bilder und Illustrationen - Cartoon Style<br>
             <a href="https://www.canva.com/de_de/" class="tool-link" target="_blank">Canva</a> (Magic Media) ·
             <a href="https://www.bing.com/images/create" class="tool-link" target="_blank">Bing Image Creator</a>
           </li>
           <li>
-            <strong>Video-AI</strong> – für kleine Clips<br>
+            <strong>Video-KI</strong> – für kleine Clips<br>
             <a href="https://hailuoai.video" class="tool-link" target="_blank">Hailuo AI</a> ·
             <a href="https://runwayml.com" class="tool-link" target="_blank">Runway</a>
           </li>
         </ul>
-        <div class="hint">🔐 <strong>Hinweis:</strong> Teile keine vertraulichen Personendaten in öffentlichen AI-Tools.</div>
+        <div class="hint">🔐 <strong>Hinweis:</strong> Teile keine vertraulichen Personendaten in öffentlichen KI-Tools.</div>
       </div>
     </section>
 
