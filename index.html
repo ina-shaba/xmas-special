@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Weihnachts-KI-Special 🎄</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <style>
+    :root {
+      /* --- FARBPALETTE & HELLIGKEIT --- */
+      --bg: #0f172a; 
+      --bg-card: rgba(30, 41, 59, 0.75); 
+      
+      --accent-soft: #fbbf24;    /* Gold */
+      
+      /* BMW M-Blau Töne */
+      --m-blue-dark: #005691;    
+      --m-blue-light: #008bd2;   
+      
+      --text: #f1f5f9;           
+      --muted: #cbd5e1;          
+      
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.4); 
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.15), rgba(56, 189, 248, 0.15), transparent 70%),
+        radial-gradient(circle at bottom right, rgba(220, 38, 38, 0.2), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 4rem;
+      overflow-x: hidden;
+    }
+
+    /* --- NAVIGATION --- */
+    header {
+      padding: 0.8rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 300;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(15, 23, 42, 0.85);
+      border-bottom: 1px solid rgba(248, 250, 252, 0.1);
+    }
+
+    .nav-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+  /* --- LOGO FIX (Näher zusammen) --- */
+   .logo {
+      display: flex;
+      align-items: center; /* Behält die vertikale Mitte bei */
+      gap: 0; /* Flex-Lücke komplett entfernen */
+      
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.6rem; 
+      line-height: 1;
+      font-family: sans-serif;
+      letter-spacing: -0.5px;
+   }
+
+    .logo img {
+      height: 32px !important; 
+      width: auto;
+      display: block;
+      
+      /* WICHTIG: Negativer Abstand zieht den Text nach links in das Bild */
+      margin-right: -6px; 
+      
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+      position: relative;
+      top: 0; 
+    }
+    
+    /* Desktop Anpassung */
+    @media (min-width: 600px) {
+        .logo { 
+            font-size: 2.2rem; 
+        } 
+        .logo img { 
+            height: 44px !important; 
+            /* Auf großen Screens ggf. noch näher ran? */
+            margin-right: -8px; 
+        }
+    }
+
+    nav {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 5px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    nav::-webkit-scrollbar { display: none; }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 0.5rem 0.8rem;
+      border: none;
+      background: transparent;
+      transition: color 0.2s ease;
+      font-weight: 500;
+    }
+
+    nav a:hover, nav a:active {
+      color: #fff;
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      max-width: 1080px;
+      margin: 1rem auto 2rem;
+      padding: 0 1rem;
+    }
+
+    .hero-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.9));
+      border-radius: 20px;
+      padding: 1.5rem 1.2rem;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    @media (min-width: 768px) {
+      .hero-inner {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        align-items: start;
+        padding: 2.5rem;
+        gap: 2.5rem;
+      }
+    }
+
+    .hero-inner::before, .hero-inner::after {
+      content: "✶";
+      position: absolute;
+      font-size: 2.8rem;
+      opacity: 0.7;
+      color: var(--accent-soft);
+      text-shadow: 0 0 15px rgba(251, 191, 36, 0.8);
+    }
+    .hero-inner::before { top: 0.5rem; right: 1rem; }
+    .hero-inner::after { bottom: 0.5rem; left: 1rem; }
+
+    .kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: 0.7rem;
+      color: var(--accent-soft);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      line-height: 1.1;
+      margin-bottom: 0.8rem;
+      background: linear-gradient(to right, #fff, #cbd5e1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+   .hero-visual {
+      background: linear-gradient(325deg, rgba(251, 191, 36, 0.15), rgba(251, 191, 36, 0.03));
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: none;
+      box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.15), 0 8px 32px rgba(0, 0, 0, 0.2);
+      border-radius: 16px;
+      padding: 1.5rem;
+      color: #e2e8f0;
+    }
+    
+    .hero-visual h2 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: #fbbf24;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hero-visual ul { 
+        padding-left: 0; 
+        list-style: none;
+        margin-bottom: 0.8rem; 
+    }
+    
+    .hero-visual li { 
+        margin-bottom: 0.6rem; 
+        font-size: 0.9rem; 
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+    }
+    
+    .hero-visual li::before {
+        content: "•";
+        color: var(--accent-soft);
+        font-weight: bold;
+    }
+
+    /* --- HAUPTBEREICH --- */
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    section { margin-top: 2.5rem; }
+
+    .section-heading {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+    }
+    
+    @media (min-width: 600px) {
+        .section-heading { flex-direction: row; align-items: baseline; gap: 0.8rem; }
+    }
+    
+    .section-heading h2 { font-size: 1.4rem; color: #fff; margin-bottom: 0.2rem; }
+    .section-heading small { font-size: 0.85rem; color: var(--muted); }
+
+    /* --- KARTEN DESIGN --- */
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 1.2rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(5px);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    @media (min-width: 800px) {
+      .card-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* Flex-Wrapper für die linke Spalte, damit Textarea Höhe zieht */
+    .prompt-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .example-box, .v-box {
+      background: rgba(15, 23, 42, 0.6); 
+      border-radius: 14px;
+      padding: 1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.05);
+      height: 100%; /* Füllt auch die Höhe */
+    }
+
+    .example-box img, .example-box video, .v-box video {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      display: block;
+      margin-top: 0.5rem;
+    }
+
+    textarea.prompt {
+      width: 100%;
+      flex-grow: 1; 
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      background: rgba(0, 0, 0, 0.2); 
+      color: #fff;
+      font-size: 16px; 
+      padding: 1rem;
+      resize: vertical;
+      min-height: 12rem;
+      font-family: inherit;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+    textarea.prompt:focus { outline: none; border-color: var(--accent-soft); background: rgba(0,0,0,0.3); }
+
+    .hint {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.8rem;
+      background: rgba(251, 191, 36, 0.05);
+      padding: 0.6rem;
+      border-radius: 8px;
+    }
+
+    /* --- UPDATE: Auffälligerer Banner & weniger Abstand --- */
+
+.internal-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  
+  width: 100%; 
+  margin-top: 0.5rem; 
+  margin-bottom: 0.5rem; 
+  
+  padding: 0.75rem 1rem;
+  
+  /* NEU: Ein heller Verlauf (macht es freundlicher, nicht schwarz) */
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+  
+  /* NEU: Heller, feiner Silber-Rahmen */
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  /* Der goldene Akzent links bleibt (für die Wichtigkeit) */
+  border-left: 4px solid #fbbf24;
+  
+  border-radius: 8px;
+  
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.internal-badge:hover {
+  /* Wird beim Hover deutlich heller */
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.internal-badge strong {
+  color: #fbbf24; /* Gold passt super zu Silber/Dunkelblau */
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.internal-badge .icon {
+  font-size: 1.1rem;
+  opacity: 1; /* Volle Deckkraft für Icon */
+}
+
+.internal-badge .arrow {
+  margin-left: auto; 
+  color: #fff;
+  opacity: 0.8;
+}
+
+
+    /* ZUCKERSTANGEN-RAND */
+    .hero-inner::before, .card::before {
+      content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 2px; 
+      background: repeating-linear-gradient(135deg, #2A64AB 0 8px, #2A64AB 8px 12px, #163C74 12px 20px, #D03C2A 20px 28px, #D03C2A 28px 32px);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; z-index: 5;
+    }
+
+    /* --- BUTTONS --- */
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 0.4rem;
+    }
+
+    .copy-btn, .tool-btn {
+      flex: 1; 
+      text-align: center;
+      justify-content: center;
+      white-space: nowrap;
+      min-width: 120px;
+    }
+
+    .copy-btn {
+      font-size: 0.9rem;
+      padding: 0.6rem 1.2rem;
+      background: linear-gradient(135deg, var(--m-blue-dark), var(--m-blue-light));
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 999px;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(0, 86, 145, 0.4);
+    }
+    .copy-btn:active { transform: scale(0.96); }
+
+    .tool-btn {
+      font-size: 0.9rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      background: transparent;
+      border: 1px solid var(--accent-soft); 
+      color: var(--accent-soft);
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: all 0.2s ease;
+    }
+    .tool-btn:active { background: rgba(251, 191, 36, 0.1); transform: scale(0.96); }
+
+    .tool-list {
+      list-style: none;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+    .tool-list li {
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .tool-list li:last-child { border-bottom: none; }
+    
+    .tool-link {
+      color: var(--accent-soft);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .tool-link:hover { text-decoration: underline; }
+
+    footer {
+      max-width: 1080px;
+      margin: 3rem auto 0;
+      padding: 0 1.25rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+      opacity: 0.7;
+    }
+
+    .snow-layer { position: fixed; inset: 0; pointer-events: none; z-index: 150; overflow: hidden; }
+    .snowflake { position: absolute; top: -10vh; color: rgba(255, 255, 255, 0.8); font-size: 0.8rem; opacity: 0.7; animation: snow-fall linear infinite; }
+    .snowflake.bmw-logo { width: 24px; font-size: 0; }
+    @keyframes snow-fall { 0% { transform: translate3d(0, -10vh, 0); } 100% { transform: translate3d(var(--sx, 0px), 110vh, 0); } }
+  </style>
+</head>
+<body>
+  <div class="snow-layer" aria-hidden="true"></div>
+
+  <header>
+    <div class="nav-inner">
+    <div class="logo">
+  <img src="w_logo.png" alt="W Logo">
+  <span style="color: var(--accent-soft);">AI</span>
+
+  <span>nachten-Special</span>
+</div>
+      <nav>
+        <a href="#start">Start</a>
+        <a href="#texte">Text</a>
+        <a href="#bilder">Bild</a>
+        <a href="#video">Video</a>
+        <a href="#kids">Spiel</a>
+        <a href="#tools">Infos</a>
+      </nav>
+    </div>
+  </header>
+
+  <section id="start" class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="kicker">Deine KI-Weihnachtswerkstatt</div>
+        <h1>Weihnachtsspaß mit KI</h1>
+        <p class="hero-sub">
+          Hier findest du fertige <strong>Prompts</strong>, die du direkt in kostenlose KI-Tools einfügen kannst. 
+          Kreiere Gedichte, Fotos, Videos und Spiele, die du mit deinen Freunden teilen kannst.
+        </p>
+        <p style="margin-top: 1rem; color: var(--accent-soft); font-size: 0.9rem; font-weight: 500;">
+          ⚠️ Für ein paar Modelle muss man sich auf der Website anmelden.
+        </p>
+      </div>
+      
+      <div class="hero-visual">
+        <h2>So nutzt du diese Seite</h2>
+        <ul>
+          <li>Kategorie auswählen: Text, Bild, Video, Spiel</li>
+          <li>Den blauen Button klicken (Kopieren)</li>
+          <li>Den goldenen Button klicken (Tool öffnen)</li>
+        </ul>
+        <p style="margin-top:0.5rem; font-size:0.85rem; opacity:0.9;">
+          🎁 <strong>Tipp:</strong> Generiere mehrere Varianten!
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+  <main>
+    <section id="texte">
+      <div class="section-heading">
+        <h2>🖊️ Weihnachtstexte</h2>
+        <small>Für Grüße und Gedichte zum Versenden im Chat</small>
+      </div>
+      
+      <div class="card">
+        <h3>Humorvolles Gedicht an Kolleg:innen </h3>
+        <div class="card-grid">
+          <div class="prompt-col">
+            <textarea id="prompt1" class="prompt" readonly>
+Prompt:
+"Schreibe ein lockeres und modernes Weihnachtsgedicht für mein Team. Es soll herzlich sein, aber auch witzig und bloß nicht kitschig. Bitte bau Folgendes ein: Ein Dankeschön für die Zusammenarbeit. Vorfreude auf nächstes Jahr mit einem Augenzwinkern. Etwas Weihnachtsstimmung (Glühwein, Lichter). Mach es ca. 12-16 Zeilen lang."
+</textarea>
+            <div class="hint">✨ <strong>Anpassen:</strong> Füge die Namen deiner „Kolleg:innen“ ein.</div>
+
+<a href="https://gaia.bmwgroup.net/genai/" target="_blank" class="internal-badge">
+  <span class="icon">🗣️</span>
+  <span>Hier geht es auf unser internes Tool <strong>GAIA</strong> weiter</span>
+  <span class="arrow">→</span>
+</a>
+
+<div class="btn-row">
+   </div>
+
+            <div class="btn-row">
+              <button class="copy-btn" data-copy="prompt1" onclick="copyPrompt('prompt1')">Kopieren</button>
+              <a class="tool-btn" href="https://chatgpt.com" target="_blank"><span>↗</span>ChatGPT</a>
+            </div>
+          </div>
+          <div class="example-box">
+            <p><strong>Beispiel Ergebnis - erstellt mit ChatGPT:</strong></p>
+            <p style="font-style:italic; opacity:0.9;">
+            Laptop zu, Glühwein auf.<br><br>
+            Der Bildschirm schwarz, die Lichter hell,<br>
+            das Jahr verging mal wieder schnell.<br> 
+            Danke für Power, Nerven und Witz,<br>
+            mit euch macht Arbeit einfach Sinn.<br><br>
+            Mein Wunsch fürs nächste Jahr steht fest:<br>
+            Weniger Meetings, mehr Keks für den Rest! 🍪🍷
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="bilder">
+      <div class="section-heading">
+        <h2>📬 Bilder zum Posten</h2>
+        <small>Für WhatsApp & Co.</small>
+      </div>
+
+     <div class="card">
+      <h3>Cooles Weihnachtsbild</h3>
+      <div class="card-grid">
+        <div class="prompt-col">
+          <textarea id="prompt4" class="prompt" readonly>
+Prompt:
+"Eine Nahaufnahme einer transparenten Weihnachtsbaumkugel aus Glas, die an einem beleuchteten Tannenbaumzweig hängt. 
+Im Inneren der Glaskugel befindet sich ein detailreiches Miniaturmodell eines BMW M4 Sportwagens in Alpinweiß, der auf einer kleinen Menge Kunstschnee steht. 
+Warme, unscharfe Lichter im Hintergrund. Fotorealistischer Stil, 8k Auflösung."
+</textarea>
+<div class="hint">✨ <strong>Tipp:</strong> Wähle <b>"No Style"</b> auf der Website aus.</div>
+
+<a href="https://imagine.bmwgroup.net/homepage" target="_blank" class="internal-badge">
+  <span class="icon">🖼️</span>
+  <span>Hier geht es auf unser internes Tool <strong>IMAGINE</strong> weiter</span>
+  <span class="arrow">→</span>
+</a>
+
+          <div class="btn-row">
+            <button class="copy-btn" data-copy="prompt4" onclick="copyPrompt('prompt4')">Kopieren</button>
+            <a class="tool-btn" href="https://perchance.org/ai-text-to-image-generator" target="_blank"><span>↗</span>Perchance</a>
+          </div>
+        </div>
+        <div class="example-box">
+          <p><strong>Beispiel Ergebnis - erstellt mit Perchance:</strong></p>
+          <img src="perchance_kugel.png" alt="Weihnachtsbild Beispiel">
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <section id="video">
+      <div class="section-heading">
+        <h2>📹 Lustige Videogrüße</h2>
+        <small>Generiere ein Video zum Teilen</small>
+      </div>
+
+    <div class="card">
+      <h3>Drift-Video zum Teilen</h3>
+      <div class="card-grid">
+        <div class="prompt-col">
+          <textarea id="prompt7" class="prompt" readonly>
+Prompt:
+"Dynamische Außenaufnahme, Nacht: Ein BMW M3 Touring in einer auffälligen Farbe hat gerade einen "Donut" im tiefen Neuschnee gedreht. 
+Der Wagen steht dampfend still. Die Kamera zoomt schnell auf das verschneite Heck. 
+Eine Hand mit einem dicken Winterhandschuh wischt schnell über die Heckklappe und schreibt krakelig den Text "Frohe Weihnachten" in den Schnee."
+</textarea>
+<div class="hint">⚠️ <strong>Info:</strong> Hier kann man sich über Gmail registieren und 8 Videos gratis generieren.</div>
+          <div class="btn-row">
+            <button class="copy-btn" data-copy="prompt7" onclick="copyPrompt('prompt7')">Kopieren</button>
+            <a class="tool-btn" href="https://hailuoai.video" target="_blank"><span>↗</span> Hailuo AI</a>
+          </div>
+        </div>
+        <div class="v-box">
+           <p><strong>Beispiel Ergebnis - erstellt mit Veo (Gemini):</strong></p>
+          <video controls playsinline muted>
+            <source src="video.mp4" type="video/quicktime">
+            Video nicht verfügbar.
+          </video>
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <section id="kids">
+      <div class="section-heading">
+        <h2>🚗 Mini-Spiele</h2>
+         <small>Lustige Spiele für die Kinder generieren, warum nicht auch zum Lernen!</small>
+      </div>
+      
+    <div class="card">
+      <h3>Weihnachts-Arcade-Game</h3>
+      <div class="card-grid">
+        <div class="prompt-col">
+          <textarea id="prompt9" class="prompt" readonly>
+Prompt:
+"Erstelle ein komplettes "BMW X-Mas Drift"-Spiel in einer einzigen HTML-Datei (Canvas API).
+Gameplay: Top-Down Arcade. Steuere einen BMW (Pfeiltasten/Touch), der auf Schnee driftet. Sammle rote Geschenke (Punkte) und weiche Bäumen aus.
+Grafik: Alles prozedural gezeichnet. Effekte: Permanenter Schneefall, Reifenspuren.
+Tech: Responsive Design, Mobile-Touch-Support, Highscore-Anzeige."</textarea>
+<div class="hint">✨ <strong>Anpassen:</strong> Canvas aktivieren, im Chat spielen und Link mit Anderen teilen.</div>
+          <div class="btn-row">
+            <button class="copy-btn" data-copy="prompt9" onclick="copyPrompt('prompt9')">Kopieren</button>
+            <a class="tool-btn" href="https://gemini.google.com" target="_blank"><span>↗</span>Gemini</a>
+          </div>
+        </div>
+        <div class="v-box">
+           <p><strong>Beispiel Ergebnis - erstellt mit Google Gemini:</strong></p>
+          <video controls playsinline muted>
+            <source src="game.mp4" type="video/quicktime">
+            Video nicht verfügbar.
+          </video>
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <section id="tools">
+      <div class="section-heading">
+        <h2>🧠 Wissen für Fortgeschrittene</h2>
+        <small>Weitere tools und Tipps</small>
+      </div>
+      <div class="card">
+        <h3>Welches Tool für was?</h3>
+        <p>Du kannst die Prompts mit verschiedenen (kostenlosen) AI-Tools ausprobieren:</p>
+        <ul class="tool-list">
+          <li>
+            <strong>Text-AI</strong> – für Gedichte, Songtexte, Quizfragen<br>
+            <a href="https://chatgpt.com" class="tool-link" target="_blank">ChatGPT</a> ·
+            <a href="https://gemini.google.com" class="tool-link" target="_blank">Google&nbsp;Gemini</a>
+          </li>
+          <li>
+            <strong>Bild-AI</strong> – für Postkarten und Illustrationen<br>
+            <a href="https://www.canva.com/de_de/" class="tool-link" target="_blank">Canva</a> (Magic Media) ·
+            <a href="https://www.bing.com/images/create" class="tool-link" target="_blank">Bing Image Creator</a>
+          </li>
+          <li>
+            <strong>Video-AI</strong> – für kleine Clips<br>
+            <a href="https://hailuoai.video" class="tool-link" target="_blank">Hailuo AI</a> ·
+            <a href="https://runwayml.com" class="tool-link" target="_blank">Runway</a>
+          </li>
+        </ul>
+        <div class="hint">🔐 <strong>Hinweis:</strong> Teile keine vertraulichen Personendaten in öffentlichen AI-Tools.</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Erstellt als kleines Weihnachts-KI-Special 🎄
+  </footer>
+
+<script>
+  function copyPrompt(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const text = el.value;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.querySelector("[data-copy='" + id + "']");
+      if (!btn) return;
+      
+      const originalText = btn.innerText;
+      btn.innerText = "✓ Kopiert!";
+      btn.style.background = "linear-gradient(135deg,#16a34a,#22c55e)";
+      btn.style.borderColor = "#16a34a";
+      
+      setTimeout(() => {
+        btn.innerText = "Kopieren";
+        btn.style.background = "linear-gradient(135deg, #005691, #008bd2)";
+        btn.style.borderColor = "rgba(255,255,255,0.1)";
+      }, 1500);
+    }).catch(() => {
+      alert("Konnte den Text leider nicht kopieren.");
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const layer = document.querySelector(".snow-layer");
+    if (!layer) return;
+    
+    const isMobile = window.innerWidth < 600;
+    const FLAKES = isMobile ? 30 : 60; 
+    
+    const snowSymbols = ["❄", "✶", "·"];
+
+    for (let i = 0; i < FLAKES; i++) {
+      const useLogo = Math.random() < 0.2; 
+      let node;
+      if (useLogo) {
+        node = document.createElement("img");
+        node.src = "m_snow.png";
+        node.className = "snowflake bmw-logo";
+      } else {
+        node = document.createElement("span");
+        node.className = "snowflake";
+        node.textContent = snowSymbols[Math.floor(Math.random() * snowSymbols.length)];
+      }
+      node.style.left = Math.random() * 100 + "vw";
+      node.style.animationDuration = 8 + Math.random() * 12 + "s";
+      node.style.animationDelay = Math.random() * 10 + "s";
+      node.style.setProperty("--sx", (Math.random() * 40 - 20) + "px");
+      layer.appendChild(node);
+    }
+  });
+</script>
+</body>
+</html>
